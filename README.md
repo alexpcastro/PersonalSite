@@ -1,3 +1,3 @@
-# React Text Based
+# Portfolio Website Built on React
 
-Created with CodeSandbox
+Personal website built on React.
