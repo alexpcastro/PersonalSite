@@ -1,13 +1,69 @@
 import "./styles.css";
-import { useState } from "react";
+import { Component, useState, useEffect } from "react";
 import { Route } from "react-router-dom";
+import Blink from "react-blink-text";
+import Clock from "react-clock";
+import AnalogClock from "react-live-clock";
+import moment from "moment";
+import "react-clock/dist/Clock.css";
+import BackButton from "./components/BackButton";
 
 export default function App() {
-  const [content, setContent] = useState();
+  const [content, setContent] = useState(false);
+  const [value, setValue] = useState(new Date());
+
+  const handleBackButtonClick = () => setContent(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => setValue(new Date()), 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  let asciiSignature = (
+    <pre className="asciiArt">
+      &nbsp;                ,-.----.                <br/>
+      &nbsp;   ,---,        \    /  \     ,----..   <br/>
+      &nbsp;  '  .' \       |   :    \   /   /   \  <br/>
+      &nbsp; /  ;    '.     |   |  .\ : |   :     : <br/>
+      &nbsp;:  :       \    .   :  |: | .   |  ;. / <br/>
+      &nbsp;:  |   /\   \   |   |   \ : .   ; /--`  <br/>
+      &nbsp;|  :  ' ;.   :  |   : .   / ;   | ;     <br/>
+      &nbsp;|  |  ;/  \   \ ;   | |`-'  |   : |     <br/>
+      &nbsp;'  :  | \  \ ,' |   | ;     .   | '___  <br/>
+      &nbsp;|  |  '  '--'   :   ' |     '   ; : .'| <br/>
+      &nbsp;|  :  :         :   : :     '   | '/  : <br/>
+      &nbsp;|  | ,'         |   | :     |   :    /  <br/>
+      &nbsp;`--''           `---'.|      \   \ .'   <br/>
+      &nbsp;                  `---`       `---`     <br/>
+      <br />
+    </pre>
+  );
+
+  let asciiEinstein = (
+    <pre className="asciiArt">
+      &nbsp;      -''--. <br/>
+      &nbsp;      _`>   `\.-'_ <br/>
+      &nbsp;   _.'     _     '._ <br/>
+      &nbsp; .'   _.='   '=._   '. <br/>
+      &nbsp; \_   / /_\ /_\ \   _/ <br/>
+      &nbsp;   / (  \o/\\o/  ) \ <br/>
+      &nbsp;   \._\ .-,_)-. /_./ <br/>
+      &nbsp;       /__/ \__\ <br/>
+      &nbsp;         '---' <br/>
+      </pre>
+  )
 
   const aboutContent = (
     <div>
-      <h2>About Me</h2>
+      <h2>
+        About Me
+        <Blink fontSize="inherit" color="#222" text="_">
+          _
+        </Blink>
+      </h2>
       <p>
         I'm an experienced software engineer, recently graduated from the MS in
         Computer Science program at Fordham.
@@ -24,14 +80,26 @@ export default function App() {
         I focus on driving meaningful business impact by looking at problems
         through an operational lens.
       </p>
-      <p>U.S. Citizen, proud Hispanic, and native Spanish speaker.</p>
-      <img src="https://flagcdn.com/es.svg" width="30" alt="Spain" />
+      <p>
+        U.S. Citizen, proud Hispanic, and native English and Spanish speaker.
+      </p>
+      <div class="d-flex align-items-center">
+        <img src="https://flagcdn.com/us.svg" height="20" alt="United States" />
+        +
+        <img src="https://flagcdn.com/es.svg" height="20" alt="Spain" />
+      </div>
+      {asciiSignature}
     </div>
   );
 
   const skillContent = (
     <div>
-      <h2>Skills</h2>
+      <h2>
+        Skills
+        <Blink fontSize="inherit" color="#222" text="_">
+          _
+        </Blink>
+      </h2>
       <p>Experienced across the full stack of web development.</p>
       <div class="titleBox">
         <h3>Front End</h3>
@@ -92,7 +160,12 @@ export default function App() {
   );
   const projectContent = (
     <div>
-      <h2>Projects</h2>
+      <h2>
+        Projects
+        <Blink fontSize="inherit" color="#222" text="_">
+          _
+        </Blink>
+      </h2>
       <p>Explore some of the things I've built. View them all on GitHub.</p>
 
       <div class="titleBox skillsBox">
@@ -233,7 +306,12 @@ export default function App() {
   );
   const eduContent = (
     <div>
-      <h2>Education</h2>
+      <h2>
+        Education
+        <Blink fontSize="inherit" color="#222" text="_">
+          _
+        </Blink>
+      </h2>
       <div class="titleBox">
         <h3>Fordham University</h3>
         <div class="description">
@@ -297,7 +375,12 @@ export default function App() {
   );
   const expContent = (
     <div>
-      <h2>My Experience</h2>
+      <h2>
+        My Experience
+        <Blink fontSize="inherit" color="#222" text="_">
+          _
+        </Blink>
+      </h2>
       <p>Explore where I've worked and grown.</p>
       <div>
         <div class="titleBox">
@@ -360,7 +443,7 @@ export default function App() {
         <div class="titleBox">
           <h3>Pure Digital</h3>
           <div class="description">
-            <span>Founder, Lead Developer</span>
+            <span>Account Manager, Lead Developer</span>
             <span class="date">April 2015 – March 2017</span>
           </div>
           <ul>
@@ -387,6 +470,7 @@ export default function App() {
         </div>
       </div>
       <figure>
+        {asciiEinstein}
         <blockquote>The only source of knowledge is experience.</blockquote>
         <figcaption>-Albert Einstein</figcaption>
       </figure>
@@ -394,16 +478,24 @@ export default function App() {
   );
   const contactContent = (
     <div>
-      <h2>Get in Touch</h2>
+      <h2>Get in Touch
+          <Blink fontSize="inherit" color="#222" text="_">
+            _
+          </Blink></h2>
       <p>Let's discuss new opportunities.</p>
     </div>
   );
 
   const homeContent = (
     <div>
-      <h2>Welcome to my portfolio.</h2>
+      <h2>
+        Welcome to my portfolio
+        <Blink fontSize="inherit" color="#222" text="_">
+          _
+        </Blink>
+      </h2>
       <p>
-        I'm <span class="highlighted">Alex Castro</span>, a software engineer
+        I'm <span className="fw-bold">Alex Castro</span>, a software engineer
         living in New York City.
       </p>
       <p>What are you looking for?</p>
@@ -431,18 +523,37 @@ export default function App() {
       </ul>
     </div>
   );
-  let backbtn = (
-    <button className="backBtn" onClick={() => setContent()}>
+  /*let backButton = (
+    <button className="backButton" onClick={() => setContent()}>
       &lsaquo;Go back
     </button>
-  );
+  );*/
+  let title = "<AlexCastro/>";
+  
   return (
     <div id="app">
       <div id="header">
-        <h1 class="highlighted">Alex Castro</h1>
-        {content ? backbtn : ""}
+        <h1 class="highlighted">{title}</h1>
+        <span id="time">
+          <Clock
+            hourHandWidth="1"
+            minuteHandWidth="1"
+            renderSecondHand="false"
+            secondHandLength="75"
+            size="15"
+            value={value}
+          />
+          <AnalogClock className="analogClock" date={value} />
+        </span>
+        {moment().format("ddd D MMM YYYY")}
       </div>
-      <div id="body">{content ? content : homeContent} </div>
+      <div id="body">
+        <div>
+          {content ? <BackButton onClick={ () => setContent() } /> : ""}
+          {content ? content : homeContent}
+          <p class="text-center">Site built with React</p>
+        </div>
+      </div>
       <div id="footer">&copy; 2022 Alex Castro</div>
     </div>
   );
