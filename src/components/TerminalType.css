@@ -1,0 +1,9 @@
+.blink {
+    animation: blinkAnimation step-start infinite;
+  }
+  
+  @keyframes blinkAnimation {
+    50% {
+      opacity: 0;
+    }
+  }

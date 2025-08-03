@@ -56,9 +56,9 @@ ul#nav button {
   font-weight: bold;
 }
 button.backBtn {
-  margin-left: auto;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: bold;
+  margin: 12px auto 24px;
 }
 blockquote {
   margin: 0;
@@ -213,4 +213,38 @@ ul.skillsList {
 }
 .text-center {
   text-align: center !important;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 12px 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInSmooth 0.5s ease forwards;
+}
+
+@keyframes fadeInSmooth {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* Completed button style */
+.completed button {
+  background: #89e234; /* Match highlighted green */
+  color: #222; /* Dark text to contrast */
+  border: 1px solid #89e234;
+  font-weight: bold;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.completed button:hover {
+  opacity: 1;
+  background: #a4f053; /* Slightly lighter green on hover */
+  border-color: #a4f053;
 }
