@@ -1,8 +1,7 @@
 import "./styles.css";
 import { useState, useEffect } from "react";
 import Clock from "react-clock";
-import AnalogClock from "react-live-clock";
-import moment from "moment";
+import LiveClock from "./components/LiveClock";
 import "react-clock/dist/Clock.css";
 import TerminalType from "./components/TerminalType";
 import About from "./pages/About";
@@ -127,9 +126,9 @@ export default function App() {
           secondHandWidth={1.1}
           renderNumbers={false}
         />
-          <AnalogClock className="analogClock" date={value} />
+          <LiveClock className="analogClock" date={value} />
         </span>
-        {moment().format("ddd D MMM YYYY")}
+        {new Date().toLocaleDateString("en-US", { weekday: "short", day: "numeric", month: "short" })}
       </div>
       <div id="body">
         <div>
